@@ -1,8 +1,8 @@
 Package: psychbootcamp
 Type: Package
-Title: Psychometric Bootcampo: Datasets and Challenges to Learn Psychometrics in R
+Title: psychbootcamp: Datasets and Challenges to Learn Psychometrics in R
 Version: 0.1.0
-Date: 2022-05-09
+Date: 2023-05-09
 Author: Miguel A. Sorrel [aut, cre], Pablo Nájera [aut]
 Maintainer: Miguel A. Sorrel <miguel.sorrel@uam.es>
 Description: The package has an educational purpose. It includes databases accessible through other repositories in a unified environment so that students have easier access to them. In the context of the Psychometry course at the Universidad Autónoma de Madrid, we have developed a series of challenges to be completed using these databases, so that the learning of Psychometrics in R is facilitated.
