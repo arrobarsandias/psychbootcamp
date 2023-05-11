@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>psychbootcamp</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">psychbootcamp</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psychbootcamp)</span></code></pre></div>
+<div id="información-sobre-la-escala" class="section level1">
+<h1>Información sobre la escala</h1>
+<p>Este documento recoge una propuesta esquemática sobre distintos
+análisis y procedimientos que suelen ser de utilidad a la hora de buscar
+evidencias de validez y fiabilidad de las puntuaciones de una escala o
+instrumento de medición en psicología y educación.</p>
+<p>Para ilustrar el proceso de análisis usaremos la escala
+<strong>Self-Efficacy for Academic Texts</strong> (SEAT):</p>
+<table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Referencia
+</td>
+<td style="text-align:left;">
+Collado, S., Fidalgo, C., Rodríguez-Rey, R., &amp; Sorrel, M. A. (2022).
+Development and validation of the self-efficacy for writing and
+defending academic texts scale. Psicología Educativa. <a href="https://doi.org/10.5093/psed2022a15" class="uri">https://doi.org/10.5093/psed2022a15</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Datos
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/7bv3a/" class="uri">https://osf.io/7bv3a/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Características
+</td>
+<td style="text-align:left;">
+8 ítems en formato de respuesta graduada de 5 categorías
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Muestra
+</td>
+<td style="text-align:left;">
+418 estudiantes universitarios españoles; recogida online; muestreo no
+probabilístico
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Variables
+</td>
+<td style="text-align:left;">
+Codebook
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Análisis
+</td>
+<td style="text-align:left;">
+Análisis de ítems; Fiabilidad; Validez: Estructura interna; Validez:
+Relación con otras variables; Interpretación de puntuaciones
+</td>
+</tr>
+</tbody>
+</table>
+<p>La escala SEAT evalúa la percepción de la persona examinada sobre su
+capacidad para redactar un texto académico y defenderlo en un examen
+oral. Los ítems 1 a 5 hacen referencia al documento escrito y los ítems
+6 a 8 a la defensa oral. El contenido de los ítems es el siguiente:</p>
+<p>Puedo buscar fuentes bibliográficas con rigor científico
+(actualizadas, en castellano e inglés, contrastadas, etc.).</p>
+<p>Puedo sintetizar e integrar ideas obtenidas de diversos textos
+científicos para apoyar mis argumentos en lenguaje escrito.</p>
+<p>Puedo manejar la normativa APA.</p>
+<p>Puedo escribir y estructurar un texto científico</p>
+<p>Puedo escribir un texto científico con la seguridad de no estar
+cometiendo plagio.</p>
+<p>Puedo hacer una presentación oral siguiendo un registro
+científico.</p>
+<p>Puedo ajustarme al tiempo establecido para una presentación oral, sin
+atropellar las palabras y sin dejarme ideas importantes.</p>
+<p>Puedo contestar y argumentar de manera adecuada las preguntas de los
+miembros del Tribunal.</p>
+<p>En el siguiente apartado ilustratmos el análisis psicométrico de la
+escala, dividiéndolo en distintos apartados que suelen ser relevantes
+con independencia del contenido concreto del instrumento que estemos
+evaluando.</p>
+</div>
+<div id="análisis-psicométrico" class="section level1">
+<h1>Análisis psicométrico</h1>
+<div id="paquetes-y-funciones" class="section level2">
+<h2>1. Paquetes y funciones</h2>
+<p>En primer lugar, deberemos instalar y cargar en R algunos paquetes
+que contienen funciones relevantes para la realización de distintos
+análisis psicométricos. Para instalar un paquete por primera vez,
+usaremos el comando <code>install.packages(&quot;&quot;)</code>, incluyendo dentro
+de las comillas el nombre del paquete. Una vez instalado un paquete,
+podremos cargarlo en R usando la función <code>library()</code>; en esta
+ocasión, no hace falta incluir el nombre del paquete entre comillas. A
+continuación se muestra el código en R para cargar todos los paquetes
+relevantes que usaremos durante el análisis psicométrico. Para encontrar
+información relativa a cada paquete, puedes buscar en la web su página
+correspondiente con la URL <a href="https://cran.r-project.org/web/packages/" class="uri">https://cran.r-project.org/web/packages/</a> seguida del
+nombre del paquete (p. ej., <a href="https://cran.r-project.org/web/packages/psych" class="uri">https://cran.r-project.org/web/packages/psych</a>). Con el
+fin de explicitar qué función se corresponde con cada paquete en los
+análisis psicométricos, usaremos la sintaxis completa con la forma
+<em>paquete::función</em>; por ejemplo, para llamar a la función
+<code>describe()</code> del paquete <code>psych</code>, usaremos
+<code>psych::describe()</code>. Indicar explícitamente el paquete no es
+necesario si lo hemos cargado previamente con la función
+<code>library()</code>, pero aquí lo haremos con un propósito puramente
+docente. Aquellas funciones para las que no indiquemos explícitamente el
+paquete se corresponden con funciones que ya vienen cargadas por defecto
+en R base, sin necesidad de instalar ningún paquete adicional.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cdmTools)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CTT)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MVN)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
+</div>
+<div id="importar-datos" class="section level2">
+<h2>2. Importar datos</h2>
+<p>En primer lugar,la base de datos se encuentra dentro del paquete de
+R. En primer lugar echamos un vistazo a sus dimensiones. En este caso,
+la base de datos está conformada por las respuestas de 418 personas a un
+total de 74 variables, 8 de las cuales son los ítems del SEAT. Para
+importar otra base de datos guardada en tu ordenador, en caso de que
+fuese un archivo de texto (.txt) la importaremos con la función
+<code>read.table()</code>. R también permite importar fácilmente bases
+de datos desde archivos .xlsx o .sav, para lo cual hacen falta paquetes
+específicos como <code>open.xlsx</code> y <code>foreign</code>,
+respectivamente.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> psychbootcamp<span class="sc">::</span>SEAT</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dat)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 418 149</span></span></code></pre></div>
+<p>Como decíamos anteriormente, la base de datos contiene respuestas de
+<code>nrow(dat) = 418</code> examinados a <code>ncol(dat) = 74</code>
+variables. Si ejecutamos el código <code>head(dat)</code> o
+<code>View(dat)</code> podemos hacernos una idea de las variables
+incluidas en la base de datos, así como los valores en cada una de
+ellas. Así, veremos que tenemos los 8 ítems de la escala
+(<strong>SEAT</strong>), y medidas para comprobar la validez convergente
+y (<strong>STAIE_T0</strong> a <strong>STAIR_T0</strong>). Para
+facilitar la escritura del código en futuros análisis, podemos guardar
+en objetos de R las posiciones de las columnas que se correspoden con
+cada una de estas variables:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>SEAT <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span> <span class="co"># SEAT</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>STAIE <span class="ot">&lt;-</span> <span class="dv">9</span><span class="sc">:</span><span class="dv">13</span> <span class="co"># STAI-Estado</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>EFGEN <span class="ot">&lt;-</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">23</span> <span class="co"># Autoeficacia general</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>EFESC <span class="ot">&lt;-</span> <span class="dv">24</span><span class="sc">:</span><span class="dv">39</span> <span class="co"># Autoeficacia escritura</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>EFHAB <span class="ot">&lt;-</span> <span class="dv">40</span><span class="sc">:</span><span class="dv">49</span> <span class="co"># Autoeficacia hablar</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ANTFG <span class="ot">&lt;-</span> <span class="dv">50</span><span class="sc">:</span><span class="dv">57</span> <span class="co"># Ansiedad TFG</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>COHAB <span class="ot">&lt;-</span> <span class="dv">58</span><span class="sc">:</span><span class="dv">69</span> <span class="co"># Confianza hablar</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>STAIR <span class="ot">&lt;-</span> <span class="dv">70</span><span class="sc">:</span><span class="dv">74</span> <span class="co"># STAI-Rasgo</span></span></code></pre></div>
+</div>
+<div id="recodificación-de-variables" class="section level2">
+<h2>3. Recodificación de variables</h2>
+<p>En este caso, todos los ítems están redactados en formato directo,
+con lo que no es necesario recodificar ninguno de ellos. Si tuviéramos
+algún ítem inverso, podríamos recodificarlo con la función
+<code>psych::reverse.code()</code>. Por ejemplo, si la variable en la
+cuarta columna de nuestra base de datos fuera inversa, podríamos
+ejecutar el siguiente código:
+<code>dat[,4] &lt;- psych::reverse.code(-1, dat[,4])</code>.</p>
+</div>
+<div id="análisis-de-ítems" class="section level2">
+<h2>4. Análisis de ítems</h2>
+<p>En primer lugar, conviene hacerse una idea de la distribución de las
+respuestas para cada variable. Para ello, obtendremos la proporción de
+examinados que han seleccionado cada opción de respuesta para los ítems
+del SEAT mediante la función
+<code>psych::response.frequencies()</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>item.freq <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">response.frequencies</span>(dat[, SEAT])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(item.freq, <span class="dv">3</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              1     2     3     4     5 miss</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1 0.017 0.103 0.397 0.328 0.156    0</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2 0.017 0.112 0.273 0.440 0.158    0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3 0.033 0.146 0.407 0.297 0.117    0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4 0.033 0.165 0.440 0.289 0.072    0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5 0.048 0.187 0.407 0.254 0.105    0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6 0.055 0.179 0.431 0.263 0.072    0</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7 0.019 0.148 0.390 0.318 0.124    0</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8 0.029 0.196 0.486 0.232 0.057    0</span></span></code></pre></div>
+<p>Aquí vemos que no hay valores perdidos para ninguno de los ítems del
+SEAT, y que las opciones intermedias suelen ser las más escogidas para
+la mayoría de los ítems. A continuación, empleamos la función
+<code>psych::describe()</code> para obtener estadísticos descriptivos a
+nivel de ítem.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>item.stat <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">describe</span>(dat[, SEAT])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>item.stat</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          vars   n mean   sd median trimmed  mad min max range  skew kurtosis</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1    1 418 3.50 0.93      3    3.52 1.48   1   5     4 -0.12    -0.34</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2    2 418 3.61 0.94      4    3.66 1.48   1   5     4 -0.46    -0.21</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3    3 418 3.32 0.97      3    3.32 1.48   1   5     4 -0.12    -0.31</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4    4 418 3.20 0.91      3    3.20 1.48   1   5     4 -0.11    -0.15</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5    5 418 3.18 1.01      3    3.16 1.48   1   5     4 -0.03    -0.40</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6    6 418 3.12 0.97      3    3.12 1.48   1   5     4 -0.12    -0.22</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7    7 418 3.38 0.95      3    3.38 1.48   1   5     4 -0.08    -0.44</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8    8 418 3.09 0.88      3    3.08 1.48   1   5     4  0.08    -0.02</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            se</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1 0.05</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2 0.05</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3 0.05</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4 0.04</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5 0.05</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6 0.05</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7 0.05</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8 0.04</span></span></code></pre></div>
+<p>También es útil explorar las correlaciones entre los distintos ítems,
+las cuales suelen verse fácilmente mediante un gráfico.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>item.cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat[, SEAT], <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(item.cor, <span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          EFTFG1_1 EFTFG1_2 EFTFG1_3 EFTFG1_4 EFTFG1_5 EFTFG1_6 EFTFG1_7</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1     1.00     0.55     0.46     0.48     0.36     0.34     0.33</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2     0.55     1.00     0.44     0.44     0.39     0.32     0.41</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3     0.46     0.44     1.00     0.45     0.42     0.30     0.24</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4     0.48     0.44     0.45     1.00     0.48     0.40     0.32</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5     0.36     0.39     0.42     0.48     1.00     0.34     0.31</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6     0.34     0.32     0.30     0.40     0.34     1.00     0.51</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7     0.33     0.41     0.24     0.32     0.31     0.51     1.00</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8     0.27     0.32     0.24     0.38     0.40     0.40     0.43</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          EFTFG1_8</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1     0.27</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2     0.32</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3     0.24</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4     0.38</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5     0.40</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6     0.40</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7     0.43</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8     1.00</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># psych::corPlot(dat[, SEAT]) # para sacar un gráfico</span></span></code></pre></div>
+<p>Por último, el siguiente código permite explorar información
+diferente, como el valor del alfa de Cronbach (consistencia interna) de
+la escala si se eliminase cada uno de los ítems.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>item.ctt <span class="ot">&lt;-</span> CTT<span class="sc">::</span><span class="fu">itemAnalysis</span>(dat[, SEAT])<span class="sc">$</span>itemReport</span></code></pre></div>
+<p>Si a esto le añadimos el índice de validez correlacionando los ítems
+con la puntuación total en la escala podemos construir una tabla muy
+completa con toda la información relevante a nivel de ítem.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>item.scale <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">cbind</span>(<span class="fu">rowSums</span>(dat[, ANTFG]), dat[, SEAT]))[<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(item.freq, item.ctt[, <span class="sc">-</span><span class="dv">1</span>], <span class="st">&quot;rjY&quot;</span> <span class="ot">=</span> item.scale), <span class="dv">2</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             1    2    3    4    5 miss itemMean pBis  bis alphaIfDeleted   rjY</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1 0.02 0.10 0.40 0.33 0.16    0     3.50 0.58 0.62           0.81 -0.43</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2 0.02 0.11 0.27 0.44 0.16    0     3.61 0.60 0.64           0.81 -0.41</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3 0.03 0.15 0.41 0.30 0.12    0     3.32 0.53 0.56           0.82 -0.47</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4 0.03 0.17 0.44 0.29 0.07    0     3.20 0.62 0.66           0.80 -0.39</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5 0.05 0.19 0.41 0.25 0.11    0     3.18 0.56 0.59           0.81 -0.47</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6 0.06 0.18 0.43 0.26 0.07    0     3.12 0.54 0.57           0.82 -0.30</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7 0.02 0.15 0.39 0.32 0.12    0     3.38 0.53 0.55           0.82 -0.27</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8 0.03 0.20 0.49 0.23 0.06    0     3.09 0.50 0.54           0.82 -0.30</span></span></code></pre></div>
+</div>
+<div id="evidencias-de-validez-estructura-interna" class="section level2">
+<h2>5. Evidencias de validez: Estructura interna</h2>
+<div id="comprobación-de-supuestos" class="section level3">
+<h3>5.1. Comprobación de supuestos</h3>
+<p>Antes de pasar a comprobar la estructura interna del cuestionario,
+conviene evaluar una serie de supuestos de los análisis. En primer
+lugar, si los ítems del SEAT pueden factorizarse, lo que haremos con el
+índice Kaiser-Meyer-Olmin (KMO).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>kmo <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">KMO</span>(dat[, SEAT])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>kmo</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Kaiser-Meyer-Olkin factor adequacy</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call: psych::KMO(r = dat[, SEAT])</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Overall MSA =  0.86</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MSA for each item = </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1 EFTFG1_2 EFTFG1_3 EFTFG1_4 EFTFG1_5 EFTFG1_6 EFTFG1_7 EFTFG1_8 </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.86     0.86     0.88     0.88     0.89     0.85     0.81     0.87</span></span></code></pre></div>
+<p>El valor del KMO es mayor de 0.80, por lo que se considera adecuado.
+Además, evaluaremos la normalidad multivariada de los datos:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mvn.test <span class="ot">&lt;-</span> MVN<span class="sc">::</span><span class="fu">mvn</span>(dat[, SEAT])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mvn.test<span class="sc">$</span>multivariateNormality</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            Test       HZ      p value MVN</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Henze-Zirkler 1.104014 3.839296e-11  NO</span></span></code></pre></div>
+<p>El contraste de hipótesis indica que no podemos asumir que haya una
+distribución normal multivariada de los datos. Sin embargo, esto puede
+deberse al elevado tamaño muestral. Podemos comprobar de una forma más
+descriptiva si la desviación de la normalidad es muy grande evaluando si
+la asimetría y la curtosis de los ítems es mayor de 3.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(mvn.test<span class="sc">$</span>Descriptives<span class="sc">$</span>Skew) <span class="sc">&gt;</span> <span class="dv">3</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(mvn.test<span class="sc">$</span>Descriptives<span class="sc">$</span>Kurtosis) <span class="sc">&gt;</span> <span class="dv">3</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span></span></code></pre></div>
+<p>En este caso, ningún ítem tiene asimetría o curtosis mayor de 3; es
+decir, que la desviación de la normalidad no es tan pronunciada. Esto
+tendrá un impacto en la elección del método de estimación que escojamos
+para el análisis factorial, en el que se recomienda usar máxima
+verosimilitud (ML) o máxima verosimilitud robusta (MLR) para datos
+normales, y mínimos cuadrados no ponderados (ULS) para datos no
+normales.</p>
+</div>
+<div id="evaluación-de-la-dimensionalidad" class="section level3">
+<h3>5.2. Evaluación de la dimensionalidad</h3>
+<p>El método más popular para evaluar la dimensionalidad de unos datos
+es el análisis paralelo, el cual podemos llevar a cabo con este
+código:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pa <span class="ot">&lt;-</span> cdmTools<span class="sc">::</span><span class="fu">paK</span>(<span class="at">dat =</span> dat[, SEAT], <span class="at">cor =</span> <span class="st">&quot;cor&quot;</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pa<span class="sc">$</span>sug.K</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pa<span class="sc">$</span>plot</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Aquí podemos ver que el análisis paralelo sugiere la presencia de una
+única dimensión. Sin embargo, es importante aclarar que este método no
+es perfecto, por lo que siempre conviene aplicar un segundo
+procedimiento para evaluar la dimensionalidad, consistente en explorar
+distintos modelos con un número de factores similar (+/- 1) al sugerido
+por el análisis paralelo. En este caso, exploraremos las soluciones de 1
+y 2 factores.</p>
+</div>
+<div id="análisis-factorial" class="section level3">
+<h3>5.3. Análisis factorial</h3>
+<p>El análisis factorial es una de las técnicas más empleadas para
+evaluar la estrucura interna de un cuesitonario. Con lo que hemos
+examinado en los anteriores subapartados, podemos empezar estimando los
+análisis factoriales exploratorios con 1 y 2 factores, empleando el
+estimador ML, para comparar su ajuste y ver la pertinencia de los pesos
+factoriales. Estimaremos los modelos con el siguiente código:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>efa1 <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">fa</span>(<span class="at">r =</span> dat[, SEAT], <span class="at">nfactors =</span> <span class="dv">1</span>, <span class="at">fm =</span> <span class="st">&quot;ml&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>efa2 <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">fa</span>(<span class="at">r =</span> dat[, SEAT], <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">fm =</span> <span class="st">&quot;ml&quot;</span>, <span class="at">rotate =</span> <span class="st">&quot;oblimin&quot;</span>)</span></code></pre></div>
+<p>Fíjate en que en ambos modelos hemos empleado ML como método de
+estimación y que, en el modelo de 2 factores, tenemos que incluir un
+argumento adicional que haga referencia a la rotación de la matriz de
+pesos factoriales. Normalmente, conviene empezar seleccionando un método
+de rotación oblicua (p. ej., <em>oblimin</em>) y compobar con el comando
+<code>efa2$Phi</code> cuánto vale la correlación estimada entre
+factores. Si es cercana a 0, podremos volver a estimar el modelo
+empleando una rotación ortogonal (p. ej., <em>varimax</em>); en este
+caso, la correlación es igual a 0.641, lo suficientemente elevada como
+para mantener la elección de la rotación oblicua.</p>
+<p>Con el fin de identificar qué solución es más apropiada para los
+datos, si la de 1 o 2 factores, podemos elaborar una tabla resumen que
+incluya información relevante a este respecto. En primer lugar,
+tendremos que evaluar el ajuste de ambos modelos, para lo cual existen
+varios procedimientos alternativos y complementarios. A nivel
+inferencial, podemos explorar el estadístico chi-cuadrado para ver si se
+puede mantener la hipótesis nula de que los residuos son igual a 0 a
+nivel poblacional. Ilustramos el código para el modelo de 1 factor,
+aunque sería equivalente para el modelo de 2 factores (cambiando
+<code>efa1</code> por <code>efa2</code> en el código):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>efa1<span class="sc">$</span>chi <span class="co"># valor del estadistico chi-cuadrado</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 113.7125</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>efa1<span class="sc">$</span>dof <span class="co"># grados de libertad</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 20</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="at">q =</span> efa1<span class="sc">$</span>chi, <span class="at">df =</span> efa1<span class="sc">$</span>dof) <span class="co"># valor p asociado al estadistico chi-cuadrado</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.107825e-15</span></span></code></pre></div>
+<p>Un valor <em>p</em> menor a 0.05 indicaría que el ajuste del modelo
+no es adecuado a nivel poblacional. Hay que tener en cuenta que este
+contraste es muy dependiente del tamaño muestral, y que puede llegar a
+indicar falta de ajuste cuando trabajamos con muestras grandes a pesar
+de que el ajuste sea realmente aceptable. Por ello, se suele explorar
+también el tamaño de los residuos existentes entre la matriz de
+correlaciones observada y la matriz de correlaciones reproducida por el
+modelo. Por ejemplo, una medida que se suele reportar es la proporción
+de residuos cuyo valor absoluto es superior a 0.05 (o 0.10):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">residuals</span>(efa1, <span class="at">diag =</span> <span class="cn">FALSE</span>)) <span class="sc">&gt;=</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.4642857</span></span></code></pre></div>
+<p>Vemos por tanto que un 46% de los residuos son superiores a 0.05. Con
+los residuos también podemos calcular un “promedio” conocido como SRMR
+que, idealmente, tiene que obtener valores menores a 0.08:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">residuals</span>(efa1, <span class="at">diag =</span> <span class="cn">FALSE</span>)<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.06969827</span></span></code></pre></div>
+<p>En este caso, el SRMR sí que obtiene un valor menor a 0.08, indicando
+que 1 factor es suficiente para encontrar un buen ajuste del modelo a
+los datos. Aparte del ajuste, hay otros indicadores importantes que se
+deben considerar a la hora de evaluar la pertinencia un modelo, tales
+como la proporción de varianza explicada por el/los factor/es y la
+matriz de pesos factoriales.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(efa1<span class="sc">$</span>loadings, <span class="at">cut =</span> <span class="dv">0</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loadings:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          ML1  </span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_1 0.667</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_2 0.679</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_3 0.604</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_4 0.697</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_5 0.621</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_6 0.579</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_7 0.564</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFTFG1_8 0.541</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  ML1</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SS loadings    3.088</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Proportion Var 0.386</span></span></code></pre></div>
+<p>Vemos que, con 1 factor, somos capaces de explicar el 38.6% de la
+varianza (compararemos este valor con la varianza explicada por el
+modelo de 2 factores más adelante). Los pesos factoriales tienen una
+magnitud adecuada, con valores superiores a 0.5.</p>
+<p>Pasamos por tanto a elaborar la tabla resumen en la que se comparen
+las soluciones de 1 y 2 factores con la información que hemos visto
+anteriormente, incluyendo la proporción de residuos mayores a 0.05, la
+proporción total de varianza explicada y la proporción de pesos
+factoriales teóricos cuyo valor absoluto es superior a 0.3:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>comp.efa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">chi =</span> <span class="fu">c</span>(efa1<span class="sc">$</span>chi, efa2<span class="sc">$</span>chi),</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">df =</span> <span class="fu">c</span>(efa1<span class="sc">$</span>dof, efa2<span class="sc">$</span>dof),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">p.value =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="at">q =</span> efa1<span class="sc">$</span>chi, <span class="at">df =</span> efa1<span class="sc">$</span>dof),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="at">q =</span> efa2<span class="sc">$</span>chi, <span class="at">df =</span> efa2<span class="sc">$</span>dof)),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">SRMR =</span> <span class="fu">c</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">residuals</span>(efa1, <span class="at">diag =</span> <span class="cn">FALSE</span>)<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">residuals</span>(efa2, <span class="at">diag =</span> <span class="cn">FALSE</span>)<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">prop.res.05 =</span> <span class="fu">c</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">residuals</span>(efa1, <span class="at">diag =</span> <span class="cn">FALSE</span>)) <span class="sc">&gt;=</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">residuals</span>(efa2, <span class="at">diag =</span> <span class="cn">FALSE</span>)) <span class="sc">&gt;=</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">prop.var =</span> <span class="fu">c</span>(efa1<span class="sc">$</span>Vaccounted[<span class="dv">2</span>], efa2<span class="sc">$</span>Vaccounted[<span class="dv">3</span>,<span class="dv">2</span>]),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">prop.load.03 =</span> <span class="fu">c</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(efa1<span class="sc">$</span>loadings[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]) <span class="sc">&gt;=</span> <span class="fl">0.3</span>), </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">mean</span>(<span class="fu">abs</span>(efa2<span class="sc">$</span>loadings[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">14</span><span class="sc">:</span><span class="dv">16</span>)]) <span class="sc">&gt;=</span> <span class="fl">0.3</span>)),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&quot;EFA1&quot;</span>, <span class="st">&quot;EFA2&quot;</span>))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(comp.efa, <span class="dv">2</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         chi df p.value SRMR prop.res.05 prop.var prop.load.03</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFA1 113.71 20       0 0.07        0.46     0.39            1</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFA2  30.23 13       0 0.04        0.18     0.46            1</span></span></code></pre></div>
+<p>En este caso, como la solución de un factor cumple con la mayoría de
+criterios, exploraremos su fiabilidad y validez en los siguientes
+apartados.</p>
+</div>
+</div>
+<div id="fiabilidad" class="section level2">
+<h2>6. Fiabilidad</h2>
+<p>Ahora que sabemos que el modelo de un factor es adecuado, podemos
+estudiar la fiabilidad de la escala. El método más común es mediante el
+alfa de Cronbach:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>int.consistency <span class="ot">&lt;-</span> CTT<span class="sc">::</span><span class="fu">itemAnalysis</span>(dat[, SEAT])</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>int.consistency<span class="sc">$</span>alpha</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8324019</span></span></code></pre></div>
+<p>Vemos que la consistencia interna de la escala es adecuada. Otra
+opción es evaluar la fiabilidad mediante el método de las dos
+mitades.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sH <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">splitHalf</span>(dat[, SEAT], <span class="at">raw =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sH<span class="sc">$</span>meanr</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8328159</span></span></code></pre></div>
+<p>De nuevo, comprobamos que el nivel de fiabilidad es adecuado.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Validez: Relación con otras variables</li>
+</ol>
+<p>Otro aspecto importante y a veces olvidado a la hora de buscar
+evidencias de validez de las puntuaciones es estudiar la relación de la
+escala con otras variables con las que teóricamente debería estar
+relacionada. El método más habitual de examinar las relaciones entre
+variables consiste en calcular las correlaciones entre las puntuaciones
+suma de cada escala. En este caso, estudiaremos las correlaciones entre
+las puntuaciones de del SEAT con el resto de escalas incluidas en la
+base de datos. Para ello, primero crearemos una base de datos en la que
+incluyamos las puntuaciones en cada escala para cada examinado, y
+posteriormente calcularemos las correlaciones de Pearson con la base de
+datos resultante.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat_S <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;SEAT&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, SEAT]),</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;EFGEN&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, EFGEN]),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;EFESC&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, EFESC]),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;EFHAB&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, EFHAB]),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;COHAB&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, COHAB]),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;ANTFG&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, ANTFG]),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;STAIE&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, STAIE]),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;STAIR&quot;</span> <span class="ot">=</span> <span class="fu">rowSums</span>(dat[, STAIR]))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat_S) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEAT&quot;</span>, <span class="st">&quot;EFGEN&quot;</span>, <span class="st">&quot;EFESC&quot;</span>, <span class="st">&quot;EFHAB&quot;</span>, <span class="st">&quot;COHAB&quot;</span>, <span class="st">&quot;ANTFG&quot;</span>, <span class="st">&quot;STAIE&quot;</span>, <span class="st">&quot;STAIR&quot;</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>criterion.cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat_S, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(criterion.cor, <span class="dv">2</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        SEAT EFGEN EFESC EFHAB COHAB ANTFG STAIE STAIR</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SEAT   1.00  0.45  0.49  0.37  0.33 -0.56 -0.27 -0.24</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFGEN  0.45  1.00  0.63  0.44  0.33 -0.26 -0.07 -0.30</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFESC  0.49  0.63  1.00  0.34  0.25 -0.33 -0.13 -0.23</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EFHAB  0.37  0.44  0.34  1.00  0.65 -0.10 -0.04 -0.20</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COHAB  0.33  0.33  0.25  0.65  1.00 -0.18 -0.16 -0.31</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ANTFG -0.56 -0.26 -0.33 -0.10 -0.18  1.00  0.54  0.39</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; STAIE -0.27 -0.07 -0.13 -0.04 -0.16  0.54  1.00  0.57</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; STAIR -0.24 -0.30 -0.23 -0.20 -0.31  0.39  0.57  1.00</span></span></code></pre></div>
+<p>Al igual que hicimos anteriormente, podríamos ayudarnos de un gráfico
+para inspeccionar las correlaciones empleando
+<code>psych::corPlot()</code>.</p>
+</div>
+<div id="puntuación-y-baremos" class="section level2">
+<h2>8. Puntuación y baremos</h2>
+<p>Una vez hemos obtenido evidencias de validez y fiabilidad de las
+puntuaciones de la escala, podemos pasar a establecer baremos, de modo
+que nos resulte más fácil interpretar las puntuaciones. Con el siguiente
+código iremos construyendo una tabla que, finalmente, nos aportará
+información relevante para la puntuación de la escala, incluyendo la
+frecuencia observada, los percentiles y las puntuaciones transformadas a
+Z, T y D.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tot_n_1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(dat[, SEAT])</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>baremo_n_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">table</span>(tot_n_1))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>percent <span class="ot">&lt;-</span> <span class="fu">round</span>((baremo_n_1<span class="sc">$</span>Freq<span class="sc">/</span><span class="fu">sum</span>(baremo_n_1<span class="sc">$</span>Freq))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>cumpercent <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cumsum</span>(baremo_n_1<span class="sc">$</span>percent), <span class="dv">1</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>rangocent <span class="ot">&lt;-</span> <span class="fu">round</span>((baremo_n_1<span class="sc">$</span>cumpercent<span class="sc">-</span>baremo_n_1<span class="sc">$</span>percent)<span class="sc">+</span>(baremo_n_1<span class="sc">$</span>percent<span class="sc">/</span><span class="dv">2</span>), <span class="dv">0</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>zscore <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">as.numeric</span>(<span class="fu">levels</span>(baremo_n_1<span class="sc">$</span>tot_n_1)) <span class="sc">-</span> <span class="fu">mean</span>(tot_n_1))<span class="sc">/</span><span class="fu">sd</span>(tot_n_1), <span class="dv">2</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>tscore <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">10</span><span class="sc">*</span>baremo_n_1<span class="sc">$</span>zscore <span class="sc">+</span> <span class="dv">50</span>, <span class="dv">0</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>dscore <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">20</span><span class="sc">*</span>baremo_n_1<span class="sc">$</span>zscore <span class="sc">+</span> <span class="dv">50</span>, <span class="dv">0</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>rangocent[baremo_n_1<span class="sc">$</span>rangocent <span class="sc">&gt;</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="dv">99</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>rangocent[baremo_n_1<span class="sc">$</span>rangocent <span class="sc">&lt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>tscore[baremo_n_1<span class="sc">$</span>tscore <span class="sc">&gt;</span> <span class="dv">90</span>] <span class="ot">&lt;-</span> <span class="dv">90</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>tscore[baremo_n_1<span class="sc">$</span>tscore <span class="sc">&lt;</span> <span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>dscore[baremo_n_1<span class="sc">$</span>dscore <span class="sc">&gt;</span> <span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>baremo_n_1<span class="sc">$</span>dscore[baremo_n_1<span class="sc">$</span>dscore <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>baremo_n_1</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    tot_n_1 Freq percent cumpercent rangocent zscore tscore dscore</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       11    1     0.2        0.2         1  -3.00     20      0</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       12    2     0.5        0.7         1  -2.81     22      0</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       14    2     0.5        1.2         1  -2.42     26      2</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       16    4     1.0        2.2         2  -2.03     30      9</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       17    7     1.7        3.9         3  -1.83     32     13</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       18   12     2.9        6.8         5  -1.64     34     17</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7       19   12     2.9        9.7         8  -1.44     36     21</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8       20   16     3.8       13.5        12  -1.25     38     25</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9       21   20     4.8       18.3        16  -1.05     40     29</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10      22   20     4.8       23.1        21  -0.86     41     33</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11      23   21     5.0       28.1        26  -0.66     43     37</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12      24   30     7.2       35.3        32  -0.47     45     41</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13      25   30     7.2       42.5        39  -0.27     47     45</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14      26   34     8.1       50.6        47  -0.08     49     48</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15      27   37     8.9       59.5        55   0.12     51     52</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16      28   26     6.2       65.7        63   0.31     53     56</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17      29   21     5.0       70.7        68   0.51     55     60</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18      30   26     6.2       76.9        74   0.70     57     64</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19      31   21     5.0       81.9        79   0.90     59     68</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20      32   27     6.5       88.4        85   1.09     61     72</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21      33   17     4.1       92.5        90   1.28     63     76</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22      34   12     2.9       95.4        94   1.48     65     80</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23      35    7     1.7       97.1        96   1.67     67     83</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24      36    4     1.0       98.1        98   1.87     69     87</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25      37    5     1.2       99.3        99   2.06     71     91</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26      38    1     0.2       99.5        99   2.26     73     95</span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27      39    2     0.5      100.0        99   2.45     74     99</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28      40    1     0.2      100.2        99   2.65     76    100</span></span></code></pre></div>
+<p>También puede ser útil visualizar la distribución de las puntuaciones
+mediante un histograma para complementar la tabla anterior.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">gghistogram</span>(tot_n_1, <span class="at">fill =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Sum Score&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Count&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40</span>), <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">by =</span> <span class="dv">4</span>))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+</div>
+<div id="comentarios-finales" class="section level1">
+<h1>Comentarios finales</h1>
+<p>Este documento ilustra en R una serie de análisis psicométricos
+útiles para buscar evidencias de validez y fiabilidad de las
+puntuaciones de una escala. Por supuesto, el listado de dichos análisis
+no es exhaustivo. Por ejemplo, existen otros modelos más allá del
+análisis factorial que pueden emplearse para analizar las respuestas a
+una escala (p. ej., teoría de respuesta al ítem, modelos de diagnóstico
+cognitivo) y otros procedimientos para evaluar si la escala se comporta
+de manera similar para distintos grupos poblacionales (p. ej.,
+funcionamiento diferencial del ítem, análisis de invarianza de medida).
+Partiendo de este documento, se espera que el lector ya tenga la base
+como para añadir distintos análisis a los aquí expuestos y adecuar el
+estudio de validación a sus intereses específicos.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

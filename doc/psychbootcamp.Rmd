@@ -1,0 +1,317 @@
+---
+title: "psychbootcamp"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{psychbootcamp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(psychbootcamp)
+```
+
+# Información sobre la escala
+
+Este documento recoge una propuesta esquemática sobre distintos análisis y procedimientos que suelen ser de utilidad a la hora de buscar evidencias de validez y fiabilidad de las puntuaciones de una escala o instrumento de medición en psicología y educación.
+
+Para ilustrar el proceso de análisis usaremos la escala **Self-Efficacy for Academic Texts** (SEAT):
+
+```{r, echo=FALSE}
+table_header <- c(
+  "Referencia", 
+  "Datos", 
+  "Características", 
+  "Muestra", 
+  "Variables", 
+  "Análisis")
+table_body <- c(
+  "Collado, S., Fidalgo, C., Rodríguez-Rey, R., & Sorrel, M. A. (2022). Development and validation of the self-efficacy for writing and defending academic texts scale. Psicología Educativa. https://doi.org/10.5093/psed2022a15",
+  "https://osf.io/7bv3a/", 
+  "8 ítems en formato de respuesta graduada de 5 categorías", 
+  "418 estudiantes universitarios españoles; recogida online; muestreo no probabilístico", 
+  "Codebook",
+  "Análisis de ítems; Fiabilidad; Validez: Estructura interna; Validez: Relación con otras variables; Interpretación de puntuaciones
+")
+
+table_frame <- data.frame(table_body)
+row.names(table_frame) <- table_header
+table <- kableExtra::kable_styling(kableExtra::column_spec(knitr::kable(table_frame, format="html"), 1, bold = TRUE), bootstrap_options = c("condensed"))
+gsub("<thead>.*</thead>", "", table)
+```
+
+La escala SEAT evalúa la percepción de la persona examinada sobre su capacidad para redactar un texto académico y defenderlo en un examen oral. Los ítems 1 a 5 hacen referencia al documento escrito y los ítems 6 a 8 a la defensa oral. El contenido de los ítems es el siguiente:
+
+Puedo buscar fuentes bibliográficas con rigor científico (actualizadas, en castellano e inglés, contrastadas, etc.).
+
+Puedo sintetizar e integrar ideas obtenidas de diversos textos científicos para apoyar mis argumentos en lenguaje escrito.
+
+Puedo manejar la normativa APA.
+
+Puedo escribir y estructurar un texto científico
+
+Puedo escribir un texto científico con la seguridad de no estar cometiendo plagio.
+
+Puedo hacer una presentación oral siguiendo un registro científico.
+
+Puedo ajustarme al tiempo establecido para una presentación oral, sin atropellar las palabras y sin dejarme ideas importantes.
+
+Puedo contestar y argumentar de manera adecuada las preguntas de los miembros del Tribunal.
+
+En el siguiente apartado ilustratmos el análisis psicométrico de la escala, dividiéndolo en distintos apartados que suelen ser relevantes con independencia del contenido concreto del instrumento que estemos evaluando.
+
+# Análisis psicométrico
+
+## 1. Paquetes y funciones
+
+En primer lugar, deberemos instalar y cargar en R algunos paquetes que contienen funciones relevantes para la realización de distintos análisis psicométricos. Para instalar un paquete por primera vez, usaremos el comando `install.packages("")`, incluyendo dentro de las comillas el nombre del paquete. Una vez instalado un paquete, podremos cargarlo en R usando la función `library()`; en esta ocasión, no hace falta incluir el nombre del paquete entre comillas. A continuación se muestra el código en R para cargar todos los paquetes relevantes que usaremos durante el análisis psicométrico. Para encontrar información relativa a cada paquete, puedes buscar en la web su página correspondiente con la URL <https://cran.r-project.org/web/packages/> seguida del nombre del paquete (p. ej., <https://cran.r-project.org/web/packages/psych>). Con el fin de explicitar qué función se corresponde con cada paquete en los análisis psicométricos, usaremos la sintaxis completa con la forma *paquete::función*; por ejemplo, para llamar a la función `describe()` del paquete `psych`, usaremos `psych::describe()`. Indicar explícitamente el paquete no es necesario si lo hemos cargado previamente con la función `library()`, pero aquí lo haremos con un propósito puramente docente. Aquellas funciones para las que no indiquemos explícitamente el paquete se corresponden con funciones que ya vienen cargadas por defecto en R base, sin necesidad de instalar ningún paquete adicional.
+
+```{r, echo = TRUE, message= FALSE, warning = FALSE}
+library(cdmTools)
+library(CTT)
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(MVN)
+library(psych)
+```
+
+## 2. Importar datos
+
+En primer lugar,la base de datos se encuentra dentro del paquete de R. En primer lugar echamos un vistazo a sus dimensiones. En este caso, la base de datos está conformada por las respuestas de 418 personas a un total de 74 variables, 8 de las cuales son los ítems del SEAT. Para importar otra base de datos guardada en tu ordenador, en caso de que fuese un archivo de texto (.txt) la importaremos con la función `read.table()`. R también permite importar fácilmente bases de datos desde archivos .xlsx o .sav, para lo cual hacen falta paquetes específicos como `open.xlsx` y `foreign`, respectivamente.
+
+```{r}
+dat <- psychbootcamp::SEAT
+dim(dat)
+```
+
+Como decíamos anteriormente, la base de datos contiene respuestas de `nrow(dat) = 418` examinados a `ncol(dat) = 74` variables. Si ejecutamos el código `head(dat)` o `View(dat)` podemos hacernos una idea de las variables incluidas en la base de datos, así como los valores en cada una de ellas. Así, veremos que tenemos los 8 ítems de la escala (**SEAT**), y medidas para comprobar la validez convergente y (**STAIE_T0** a **STAIR_T0**). Para facilitar la escritura del código en futuros análisis, podemos guardar en objetos de R las posiciones de las columnas que se correspoden con cada una de estas variables:
+
+```{r}
+SEAT <- 1:8 # SEAT
+STAIE <- 9:13 # STAI-Estado
+EFGEN <- 14:23 # Autoeficacia general
+EFESC <- 24:39 # Autoeficacia escritura
+EFHAB <- 40:49 # Autoeficacia hablar
+ANTFG <- 50:57 # Ansiedad TFG
+COHAB <- 58:69 # Confianza hablar
+STAIR <- 70:74 # STAI-Rasgo
+```
+
+## 3. Recodificación de variables
+
+En este caso, todos los ítems están redactados en formato directo, con lo que no es necesario recodificar ninguno de ellos. Si tuviéramos algún ítem inverso, podríamos recodificarlo con la función `psych::reverse.code()`. Por ejemplo, si la variable en la cuarta columna de nuestra base de datos fuera inversa, podríamos ejecutar el siguiente código: `dat[,4] <- psych::reverse.code(-1, dat[,4])`.
+
+## 4. Análisis de ítems
+
+En primer lugar, conviene hacerse una idea de la distribución de las respuestas para cada variable. Para ello, obtendremos la proporción de examinados que han seleccionado cada opción de respuesta para los ítems del SEAT mediante la función `psych::response.frequencies()`.
+
+```{r}
+item.freq <- psych::response.frequencies(dat[, SEAT])
+round(item.freq, 3)
+```
+
+Aquí vemos que no hay valores perdidos para ninguno de los ítems del SEAT, y que las opciones intermedias suelen ser las más escogidas para la mayoría de los ítems. A continuación, empleamos la función `psych::describe()` para obtener estadísticos descriptivos a nivel de ítem.
+
+```{r}
+item.stat <- psych::describe(dat[, SEAT])
+item.stat
+```
+
+También es útil explorar las correlaciones entre los distintos ítems, las cuales suelen verse fácilmente mediante un gráfico.
+
+```{r}
+item.cor <- cor(dat[, SEAT], method = "pearson", use = "complete.obs")
+round(item.cor, 2)
+# psych::corPlot(dat[, SEAT]) # para sacar un gráfico
+```
+
+Por último, el siguiente código permite explorar información diferente, como el valor del alfa de Cronbach (consistencia interna) de la escala si se eliminase cada uno de los ítems.
+
+```{r}
+item.ctt <- CTT::itemAnalysis(dat[, SEAT])$itemReport
+```
+
+Si a esto le añadimos el índice de validez correlacionando los ítems con la puntuación total en la escala podemos construir una tabla muy completa con toda la información relevante a nivel de ítem.
+
+```{r}
+item.scale <- cor(cbind(rowSums(dat[, ANTFG]), dat[, SEAT]))[-1, 1]
+round(cbind(item.freq, item.ctt[, -1], "rjY" = item.scale), 2)
+```
+
+## 5. Evidencias de validez: Estructura interna
+
+### 5.1. Comprobación de supuestos
+
+Antes de pasar a comprobar la estructura interna del cuestionario, conviene evaluar una serie de supuestos de los análisis. En primer lugar, si los ítems del SEAT pueden factorizarse, lo que haremos con el índice Kaiser-Meyer-Olmin (KMO).
+
+```{r}
+kmo <- psych::KMO(dat[, SEAT])
+kmo
+```
+
+El valor del KMO es mayor de 0.80, por lo que se considera adecuado. Además, evaluaremos la normalidad multivariada de los datos:
+
+```{r}
+mvn.test <- MVN::mvn(dat[, SEAT])
+mvn.test$multivariateNormality
+```
+
+El contraste de hipótesis indica que no podemos asumir que haya una distribución normal multivariada de los datos. Sin embargo, esto puede deberse al elevado tamaño muestral. Podemos comprobar de una forma más descriptiva si la desviación de la normalidad es muy grande evaluando si la asimetría y la curtosis de los ítems es mayor de 3.
+
+```{r}
+abs(mvn.test$Descriptives$Skew) > 3
+abs(mvn.test$Descriptives$Kurtosis) > 3
+```
+
+En este caso, ningún ítem tiene asimetría o curtosis mayor de 3; es decir, que la desviación de la normalidad no es tan pronunciada. Esto tendrá un impacto en la elección del método de estimación que escojamos para el análisis factorial, en el que se recomienda usar máxima verosimilitud (ML) o máxima verosimilitud robusta (MLR) para datos normales, y mínimos cuadrados no ponderados (ULS) para datos no normales.
+
+### 5.2. Evaluación de la dimensionalidad
+
+El método más popular para evaluar la dimensionalidad de unos datos es el análisis paralelo, el cual podemos llevar a cabo con este código:
+
+```{r, message=FALSE}
+pa <- cdmTools::paK(dat = dat[, SEAT], cor = "cor", verbose = FALSE) 
+pa$sug.K
+pa$plot
+```
+
+Aquí podemos ver que el análisis paralelo sugiere la presencia de una única dimensión. Sin embargo, es importante aclarar que este método no es perfecto, por lo que siempre conviene aplicar un segundo procedimiento para evaluar la dimensionalidad, consistente en explorar distintos modelos con un número de factores similar (+/- 1) al sugerido por el análisis paralelo. En este caso, exploraremos las soluciones de 1 y 2 factores.
+
+### 5.3. Análisis factorial
+
+El análisis factorial es una de las técnicas más empleadas para evaluar la estrucura interna de un cuesitonario. Con lo que hemos examinado en los anteriores subapartados, podemos empezar estimando los análisis factoriales exploratorios con 1 y 2 factores, empleando el estimador ML, para comparar su ajuste y ver la pertinencia de los pesos factoriales. Estimaremos los modelos con el siguiente código:
+
+```{r, message=FALSE}
+efa1 <- psych::fa(r = dat[, SEAT], nfactors = 1, fm = "ml")
+efa2 <- psych::fa(r = dat[, SEAT], nfactors = 2, fm = "ml", rotate = "oblimin")
+```
+
+Fíjate en que en ambos modelos hemos empleado ML como método de estimación y que, en el modelo de 2 factores, tenemos que incluir un argumento adicional que haga referencia a la rotación de la matriz de pesos factoriales. Normalmente, conviene empezar seleccionando un método de rotación oblicua (p. ej., *oblimin*) y compobar con el comando `efa2$Phi` cuánto vale la correlación estimada entre factores. Si es cercana a 0, podremos volver a estimar el modelo empleando una rotación ortogonal (p. ej., *varimax*); en este caso, la correlación es igual a 0.641, lo suficientemente elevada como para mantener la elección de la rotación oblicua.
+
+Con el fin de identificar qué solución es más apropiada para los datos, si la de 1 o 2 factores, podemos elaborar una tabla resumen que incluya información relevante a este respecto. En primer lugar, tendremos que evaluar el ajuste de ambos modelos, para lo cual existen varios procedimientos alternativos y complementarios. A nivel inferencial, podemos explorar el estadístico chi-cuadrado para ver si se puede mantener la hipótesis nula de que los residuos son igual a 0 a nivel poblacional. Ilustramos el código para el modelo de 1 factor, aunque sería equivalente para el modelo de 2 factores (cambiando `efa1` por `efa2` en el código):
+
+```{r, message=FALSE}
+efa1$chi # valor del estadistico chi-cuadrado
+efa1$dof # grados de libertad
+1 - pchisq(q = efa1$chi, df = efa1$dof) # valor p asociado al estadistico chi-cuadrado
+```
+
+Un valor *p* menor a 0.05 indicaría que el ajuste del modelo no es adecuado a nivel poblacional. Hay que tener en cuenta que este contraste es muy dependiente del tamaño muestral, y que puede llegar a indicar falta de ajuste cuando trabajamos con muestras grandes a pesar de que el ajuste sea realmente aceptable. Por ello, se suele explorar también el tamaño de los residuos existentes entre la matriz de correlaciones observada y la matriz de correlaciones reproducida por el modelo. Por ejemplo, una medida que se suele reportar es la proporción de residuos cuyo valor absoluto es superior a 0.05 (o 0.10):
+
+```{r, message=FALSE}
+mean(abs(residuals(efa1, diag = FALSE)) >= 0.05, na.rm = TRUE)
+```
+
+Vemos por tanto que un 46% de los residuos son superiores a 0.05. Con los residuos también podemos calcular un "promedio" conocido como SRMR que, idealmente, tiene que obtener valores menores a 0.08:
+
+```{r, message=FALSE}
+sqrt(mean(residuals(efa1, diag = FALSE)^2, na.rm = TRUE))
+```
+
+En este caso, el SRMR sí que obtiene un valor menor a 0.08, indicando que 1 factor es suficiente para encontrar un buen ajuste del modelo a los datos. Aparte del ajuste, hay otros indicadores importantes que se deben considerar a la hora de evaluar la pertinencia un modelo, tales como la proporción de varianza explicada por el/los factor/es y la matriz de pesos factoriales.
+
+```{r, message=FALSE}
+print(efa1$loadings, cut = 0)
+```
+
+Vemos que, con 1 factor, somos capaces de explicar el 38.6% de la varianza (compararemos este valor con la varianza explicada por el modelo de 2 factores más adelante). Los pesos factoriales tienen una magnitud adecuada, con valores superiores a 0.5.
+
+Pasamos por tanto a elaborar la tabla resumen en la que se comparen las soluciones de 1 y 2 factores con la información que hemos visto anteriormente, incluyendo la proporción de residuos mayores a 0.05, la proporción total de varianza explicada y la proporción de pesos factoriales teóricos cuyo valor absoluto es superior a 0.3:
+
+```{r, message=FALSE}
+comp.efa <- data.frame(chi = c(efa1$chi, efa2$chi),
+                       df = c(efa1$dof, efa2$dof),
+                       p.value = c(1 - pchisq(q = efa1$chi, df = efa1$dof),
+                                   1 - pchisq(q = efa2$chi, df = efa2$dof)),
+                       SRMR = c(sqrt(mean(residuals(efa1, diag = FALSE)^2, na.rm = TRUE)),
+                                sqrt(mean(residuals(efa2, diag = FALSE)^2, na.rm = TRUE))),
+                       prop.res.05 = c(mean(abs(residuals(efa1, diag = FALSE)) >= 0.05, na.rm = TRUE), 
+                                       mean(abs(residuals(efa2, diag = FALSE)) >= 0.05, na.rm = TRUE)),
+                       prop.var = c(efa1$Vaccounted[2], efa2$Vaccounted[3,2]),
+                       prop.load.03 = c(mean(abs(efa1$loadings[1:8]) >= 0.3), 
+                                        mean(abs(efa2$loadings[c(1:5, 14:16)]) >= 0.3)),
+                       row.names = c("EFA1", "EFA2"))
+round(comp.efa, 2)
+```
+
+En este caso, como la solución de un factor cumple con la mayoría de criterios, exploraremos su fiabilidad y validez en los siguientes apartados.
+
+## 6. Fiabilidad
+
+Ahora que sabemos que el modelo de un factor es adecuado, podemos estudiar la fiabilidad de la escala. El método más común es mediante el alfa de Cronbach:
+
+```{r}
+int.consistency <- CTT::itemAnalysis(dat[, SEAT])
+int.consistency$alpha
+```
+
+Vemos que la consistencia interna de la escala es adecuada. Otra opción es evaluar la fiabilidad mediante el método de las dos mitades.
+
+```{r}
+sH <- psych::splitHalf(dat[, SEAT], raw = TRUE)
+sH$meanr
+```
+
+De nuevo, comprobamos que el nivel de fiabilidad es adecuado.
+
+7. Validez: Relación con otras variables
+
+Otro aspecto importante y a veces olvidado a la hora de buscar evidencias de validez de las puntuaciones es estudiar la relación de la escala con otras variables con las que teóricamente debería estar relacionada. El método más habitual de examinar las relaciones entre variables consiste en calcular las correlaciones entre las puntuaciones suma de cada escala. En este caso, estudiaremos las correlaciones entre las puntuaciones de del SEAT con el resto de escalas incluidas en la base de datos. Para ello, primero crearemos una base de datos en la que incluyamos las puntuaciones en cada escala para cada examinado, y posteriormente calcularemos las correlaciones de Pearson con la base de datos resultante.
+
+```{r}
+dat_S <- data.frame("SEAT" = rowSums(dat[, SEAT]),
+                    "EFGEN" = rowSums(dat[, EFGEN]),
+                    "EFESC" = rowSums(dat[, EFESC]),
+                    "EFHAB" = rowSums(dat[, EFHAB]),
+                    "COHAB" = rowSums(dat[, COHAB]),
+                    "ANTFG" = rowSums(dat[, ANTFG]),
+                    "STAIE" = rowSums(dat[, STAIE]),
+                    "STAIR" = rowSums(dat[, STAIR]))
+colnames(dat_S) <- c("SEAT", "EFGEN", "EFESC", "EFHAB", "COHAB", "ANTFG", "STAIE", "STAIR")
+criterion.cor <- cor(dat_S, method = "pearson", use = "complete.obs")
+round(criterion.cor, 2)
+```
+
+Al igual que hicimos anteriormente, podríamos ayudarnos de un gráfico para inspeccionar las correlaciones empleando `psych::corPlot()`.
+
+
+## 8. Puntuación y baremos
+
+Una vez hemos obtenido evidencias de validez y fiabilidad de las puntuaciones de la escala, podemos pasar a establecer baremos, de modo que nos resulte más fácil interpretar las puntuaciones. Con el siguiente código iremos construyendo una tabla que, finalmente, nos aportará información relevante para la puntuación de la escala, incluyendo la frecuencia observada, los percentiles y las puntuaciones transformadas a Z, T y D.
+
+```{r, message=FALSE}
+tot_n_1 <- rowSums(dat[, SEAT])
+baremo_n_1 <- data.frame(table(tot_n_1))
+baremo_n_1$percent <- round((baremo_n_1$Freq/sum(baremo_n_1$Freq))*100, 1)
+baremo_n_1$cumpercent <- round(cumsum(baremo_n_1$percent), 1)
+baremo_n_1$rangocent <- round((baremo_n_1$cumpercent-baremo_n_1$percent)+(baremo_n_1$percent/2), 0)
+baremo_n_1$zscore <- round((as.numeric(levels(baremo_n_1$tot_n_1)) - mean(tot_n_1))/sd(tot_n_1), 2)
+baremo_n_1$tscore <- round(10*baremo_n_1$zscore + 50, 0)
+baremo_n_1$dscore <- round(20*baremo_n_1$zscore + 50, 0)
+baremo_n_1$rangocent[baremo_n_1$rangocent > 99] <- 99
+baremo_n_1$rangocent[baremo_n_1$rangocent < 1] <- 1
+baremo_n_1$tscore[baremo_n_1$tscore > 90] <- 90
+baremo_n_1$tscore[baremo_n_1$tscore < 10] <- 10
+baremo_n_1$dscore[baremo_n_1$dscore > 100] <- 100
+baremo_n_1$dscore[baremo_n_1$dscore < 0] <- 0
+baremo_n_1
+```
+
+También puede ser útil visualizar la distribución de las puntuaciones mediante un histograma para complementar la tabla anterior.
+
+```{r, message=FALSE}
+ggpubr::gghistogram(tot_n_1, fill = "darkgray", xlab = "Sum Score", ylab = "Count", xlim = c(0, 40), bins = 20) + 
+  ggplot2::scale_x_continuous(breaks = seq(0, 40, by = 4))
+```
+
+# Comentarios finales
+
+Este documento ilustra en R una serie de análisis psicométricos útiles para buscar evidencias de validez y fiabilidad de las puntuaciones de una escala. Por supuesto, el listado de dichos análisis no es exhaustivo. Por ejemplo, existen otros modelos más allá del análisis factorial que pueden emplearse para analizar las respuestas a una escala (p. ej., teoría de respuesta al ítem, modelos de diagnóstico cognitivo) y otros procedimientos para evaluar si la escala se comporta de manera similar para distintos grupos poblacionales (p. ej., funcionamiento diferencial del ítem, análisis de invarianza de medida). Partiendo de este documento, se espera que el lector ya tenga la base como para añadir distintos análisis a los aquí expuestos y adecuar el estudio de validación a sus intereses específicos.

@@ -16,5 +16,6 @@ To install this package from source:
 2. Install the `remotes` package (if necessary), and install the package from the Github source code.
 
 ```
-#install.packages("remotes")
-remotes::install_github("miguel-sorrel/psychbootcamp")
+#install.packages("devtools")
+devtools::install_github("miguel-sorrel/psychbootcamp", build_vignettes = TRUE)
+```
